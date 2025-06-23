@@ -12,7 +12,6 @@ cd CF-zerotrust
 ```bash
 export TF_VAR_cloudflare_api_token="your-api-token"
 export TF_VAR_cloudflare_account_id="your-account-id"
-export TF_VAR_psk="your-ipsec-psk"  # ※必要な場合のみ
 ```
 
 ## 3. Terraform を初期化
