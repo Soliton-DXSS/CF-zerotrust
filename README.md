@@ -39,17 +39,21 @@ terraform apply
 Terraform を実行する前に、Cloudflare ダッシュボード上で以下の情報を取得・準備しておく必要があります：
 
 1. **API トークン（API Token）**
-   - [Cloudflareのダッシュボード](https://dash.cloudflare.com/profile/api-tokens) にログイン
-   - 「API Tokens」から **"Edit Cloudflare Zero Trust settings" に必要な権限を持つトークン** を作成・取得
-   - 最低限必要なスコープ例：
-     - `Account > Zero Trust Gateway > Edit`
+   - Cloudflareのダッシュボードにログインし、「API トークン」一覧画面へアクセス
+   - [トークンを作成する] をクリックし、「カスタムトークンを作成する」から [始める] を選択
+   - 以下の設定を行い [概要に進む] をクリック：
+     - **トークン名**：任意（例：Terraform Token）
+     - **権限**：`アカウント > Zero Trust > 編集` を含むこと
+     - **アカウント リソース**：対象のテナント（アカウント）が選択されていること
+     - **クライアント IP アドレス フィルタリング**：任意
+     - **TTL（有効期限）**：任意
+   - 最後に [トークンを生成する] をクリックすると、API トークンが表示されます（この画面でのみ表示されるため、安全に保管してください）
 
 2. **アカウント ID（Account ID）**
-   - ダッシュボード左上の「Overview（概要）」から確認可能
-   - Terraform の変数 `cloudflare_account_id` に指定します
+   - Cloudflareのダッシュボードで「アカウントの選択」画面を開き、対象アカウントの右にある「･･･（三点メニュー）」をクリック
+   - プルダウンメニューから「アカウントIDをコピー」を選択すると、クリップボードにコピーされます
 
 > これらの情報は **GitHubやファイル上に平文で保存せず、環境変数などで安全に管理することを推奨**します。
-
 ## 🧰 開発環境の前提（WSL + Terraform）
 
 このテンプレートは WSL（Windows Subsystem for Linux）上で Terraform を利用する前提で構成されています。
