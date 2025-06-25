@@ -46,7 +46,7 @@ Terraform を実行する前に、Cloudflare ダッシュボード上で以下�
      - **トークン名**：任意（例：Terraform Token）
      - **権限**：`アカウント > Zero Trust > 編集` を含むこと
      - **クライアント IP アドレス フィルタリング**：オペレーター「次にある」、値に接続元のIPを入力  
-       IPアドレスが不明な際は https://checkip.amazonaws.com/ で確認してください
+       IPアドレスが不明な際は https://pages.soliton.cftenant.com/ で確認してください
      - **TTL（有効期限）**：任意
    - 最後に [トークンを生成する] をクリックすると、API トークンが表示されます（この画面でのみ表示されるため、安全に保管してください）
 
