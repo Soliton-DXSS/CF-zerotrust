@@ -7,26 +7,44 @@ git clone git@github.com:Soliton-DXSS/CF-zerotrust.git
 cd CF-zerotrust
 ```
 
-## 2. 機密情報を環境変数で設定（推奨）
+## 2. スプリットトンネル、ローカルドメインフォールバック、デバイスエンロールメントを修正
+
+以下の設定ファイルを用途に応じて編集してください：
+
+- **ローカルドメインフォールバック**
+  - 対象ファイル：`device_custom_profile.tf`
+  - 該当箇所：`resource "cloudflare_zero_trust_device_custom_profile_local_domain_fallback" "corp_ldf"` 以降
+  - 内容：フォールバックさせるドメイン情報（`suffix`, `dns_server` など）を編集
+
+- **スプリットトンネル（除外）**
+  - 対象ファイル：`device_custom_profile.tf`
+  - 該当箇所：`exclude` ブロック以降
+  - 内容：除外対象のIPやドメインを編集
+
+- **OTPで許可するドメイン**
+  - 対象ファイル：`device_enrollment.tf`
+  - 内容：One-Time PIN 認証で許可するドメインを編集（`allowed_domains` 等）
+
+## 3. 機密情報を環境変数で設定（推奨）
 
 ```bash
 export TF_VAR_cloudflare_api_token="your-api-token"
 export TF_VAR_cloudflare_account_id="your-account-id"
 ```
 
-## 3. Terraform を初期化
+## 4. Terraform を初期化
 
 ```bash
 terraform init
 ```
 
-## 4. 適用内容の確認
+## 5. 適用内容の確認
 
 ```bash
 terraform plan
 ```
 
-## 5. 設定の適用
+## 6. 設定の適用
 
 ```bash
 terraform apply
@@ -45,6 +63,7 @@ Terraform を実行する前に、Cloudflare ダッシュボード上で以下�
    - 以下の設定を行い [概要に進む] をクリック：
      - **トークン名**：任意（例：Terraform Token）
      - **権限**：`アカウント > Zero Trust > 編集` を含むこと
+     - **権限**：`アカウント > アクセス: アプリおよびポリシー > 編集` を含むこと
      - **クライアント IP アドレス フィルタリング**：オペレーター「次にある」、値に接続元のIPを入力  
        IPアドレスが不明な際は https://pages.soliton.cftenant.com/ で確認してください
      - **TTL（有効期限）**：任意

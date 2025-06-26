@@ -1,4 +1,4 @@
-resource "cloudflare_zero_trust_device_custom_profile" "example_zero_trust_device_custom_profile" {
+resource "cloudflare_zero_trust_device_custom_profile" "poc_custom_profile" {
   account_id = var.cloudflare_account_id
   match = "identity.email == \"test@cloudflare.com\""
   name = "PoC Profile"
@@ -73,4 +73,61 @@ resource "cloudflare_zero_trust_device_custom_profile" "example_zero_trust_devic
   support_url = ""
   switch_locked = false
   tunnel_protocol = "masque"
+}
+
+resource "cloudflare_zero_trust_device_custom_profile_local_domain_fallback" "corp_ldf" {
+  account_id = var.cloudflare_account_id
+  # ここがポイント ── 作成済みプロファイルの .id をそのまま渡す
+  policy_id  = cloudflare_zero_trust_device_custom_profile.poc_custom_profile.id
+
+  # LDF の設定
+domains = [
+  {
+          suffix ="home.arpa"
+        },
+        {
+          suffix ="intranet"
+        },
+        {
+          suffix ="internal"
+        },
+        {
+          suffix ="private"
+        },
+        {
+          suffix ="localdomain"
+        },
+        {
+          suffix ="domain"
+        },
+        {
+          suffix ="lan"
+        },
+        {
+          suffix ="home"
+        },
+        {
+          suffix ="host"
+        },
+        {
+          suffix ="corp"
+        },
+        {
+          suffix ="local"
+        },
+        {
+          suffix ="localhost"
+        },
+        {
+          suffix ="invalid"
+        },
+        {
+          suffix ="test"
+        },
+		{
+          suffix      = "soliton.co.jp"
+      description = "本社ネットワーク向け"
+      dns_server  = ["10.1.1.1", "10.1.1.2"]
+        }
+  ]
 }

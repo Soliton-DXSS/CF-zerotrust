@@ -5,9 +5,9 @@ resource "cloudflare_zero_trust_gateway_settings" "example_zero_trust_gateway_se
       enabled = true
     }
     antivirus = {
-      enabled_download_phase = false
-      enabled_upload_phase = false
-      fail_closed = false
+      enabled_download_phase = true
+      enabled_upload_phase = true
+      fail_closed = true
       notification_settings = {
         enabled = true
         include_context = true
