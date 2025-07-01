@@ -3,7 +3,7 @@
 ## 1. このリポジトリをクローン
 
 ```bash
-git clone git@github.com:Soliton-DXSS/CF-zerotrust.git
+git clone https://github.com/Soliton-DXSS/CF-zerotrust.git
 cd CF-zerotrust
 ```
 
