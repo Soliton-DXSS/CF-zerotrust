@@ -44,7 +44,7 @@ resource "cloudflare_zero_trust_gateway_settings" "example_zero_trust_gateway_se
       enabled = true
     }
     sandbox = {
-      enabled = true
+      enabled = false
       fallback_action = "allow"
     }
     tls_decrypt = {
